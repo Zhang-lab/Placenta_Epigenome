@@ -1,6 +1,6 @@
 ## Merge MACS2 peak output
 
-cat peak_file1.bed peak_file2.bed peakfile3.bed > merged_peaks.bed
+cat peak_2ndtri.bed peak_3rdtri.bed peak_sPE.bed > merged_peaks.bed
 sort -k1,1 -k2,2n merged_peaks.bed > merged_peaks.bed.sorted
 bedtools merge -i merged_peaks.bed.sorted > merged_peaks.bed
 
