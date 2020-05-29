@@ -1,0 +1,18 @@
+## 1) Averaging bigwig files
+
+# Merge replicates using bigWigMerge. This will simply generate the sum of all replicates
+bigWigMerge B39987*.w50.bamCoverage.bw B39989*.w50.bamCoverage.bw B39991*.w50.bamCoverage.bw B39993*.w50.bamCoverage.bw B39995*.50.bamCoverage.bw new_3rdtri_merged2.bedGraph
+
+# Divide the score by the number of smaples merged to generate average scores
+awk  -F "\t" '{print $1, $2, $3, $4/4}' new_3rdtri_merged2.bedGraph > new_3rdtri_merged2.average.bedGraph
+  # modify $4/4 according to the sample number. For two samples, $4/2, for five samples, $4/5, etc. 
+  
+# Sort averaged file
+sort -k1,1 -k2,2n new_3rdtri_merged2.average.bedGraph > new_3rdtri_merged2.average.bedGraph.sorted
+
+# Run bedGraphToBigWig to convert bedGraph to Bigwig for visualization
+bedGraphToBigWig new_3rdtri_merged2.average.bedGraph.sorted hg19.size bedGraphToBigWig new_3rdtri_merged2.average.bw
+
+
+## 2) Load the average file on http://epigenomegateway.wustl.edu/browser/
+
