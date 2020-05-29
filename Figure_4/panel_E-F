@@ -1,0 +1,9 @@
+1) Identified the genes associated the differentially acetylated peak list (identified in panel d) using GREAT v3.0 
+  a. http://great.stanford.edu/public/html/
+  b. options: Basal plus extesion; proximal: 5 kb upstream, 1 kb downstream, plus Distal: up to 0 kb
+2) Gene ontology analysis 
+  a. https://www.gsea-msigdb.org/gsea/msigdb/annotate.jsp
+  b. choose
+    H1: hallmark gene sets
+    BP: GO biological process
+  
