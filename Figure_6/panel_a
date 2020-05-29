@@ -7,7 +7,7 @@ bedtools merge -i merged_peaks.bed.sorted > merged_peaks.bed
 ## Determine the score of each peak window
 
 bedtools map -a input.w1.cpm-normalized.bed -b merged_peaks.bed -c 4 -o sum
-  # do this for all samples
+  # repeat this step for all samples
 
 ## boxplots were generated using GraphPad Prism7 
 
