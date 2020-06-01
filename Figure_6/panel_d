@@ -1,0 +1,6 @@
+# 1) Plug in the sites found in H3K27ac_2ndup.bed in Test regions on http://great.stanford.edu/great/public-3.0.0/html/
+  # Background regions : whole genome
+  # Association rule settings: Proximal: 5 kb upstream, 1 kb downstream, plus Distal: up to 0 kb
+  
+# 2) Plug in the genes associated with the peaks into https://www.gsea-msigdb.org/gsea/msigdb/annotate.jsp
+  # Click H: Hallmark gene sets
