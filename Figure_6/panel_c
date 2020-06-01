@@ -1,1 +1,25 @@
-# Use H3K27ac_2ndup.bed as a bed file
+## 1) Averaging bigwig files. Perform this for 2nd tri samples, 3rd tri samples, 2nd tri-like sPEs, and 3rd tri-like sPEs
+
+# Merge replicates using bigWigMerge. This will simply generate the sum of all replicates
+bigWigMerge B39987*.w50.bamCoverage.bw B39989*.w50.bamCoverage.bw B39991*.w50.bamCoverage.bw B39993*.w50.bamCoverage.bw B39995*.50.bamCoverage.bw new_3rdtri_merged2.bedGraph
+
+# Divide the score by the number of smaples merged to generate average scores
+awk  -F "\t" '{print $1, $2, $3, $4/4}' new_3rdtri_merged2.bedGraph > new_3rdtri_merged2.average.bedGraph
+  # modify $4/4 according to the sample number. For two samples, $4/2, for five samples, $4/5, etc. 
+  
+# Sort averaged file
+sort -k1,1 -k2,2n new_3rdtri_merged2.average.bedGraph > new_3rdtri_merged2.average.bedGraph.sorted
+
+# Run bedGraphToBigWig to convert bedGraph to Bigwig for visualization
+bedGraphToBigWig new_3rdtri_merged2.average.bedGraph.sorted hg19.size bedGraphToBigWig new_3rdtri_merged2.average.bw
+
+## 2) Calculate scores per genome regions found in "H3K27ac_2ndup.bed". 
+
+computeMatrix --reference-point -S 2ndtri.bw 3rdtri.bw 2ndlike_sPE.bw 3rdlike_sPE.bw -o results.npz -R H3K27ac_2ndup.bed -a 500 -b 500 -p 32
+#"H3K27ac_2ndup.bed" is found in Figure_6 folder
+
+## 3) Plot average pattern of H3K27ac levels within genomic regions
+
+plotHeatmap -m results.npz -out results.pdf
+
+## 4) Combined the graphs into one using Illustrator
