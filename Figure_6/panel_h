@@ -1,0 +1,10 @@
+# 1) Calculate scores per genome regions found in "H3K27ac_2ndup_sPEup.bed". 
+
+computeMatrix --reference-point -S 2ndtri.bw 3rdtri.bw 2ndlike_sPE.bw 3rdlike_sPE.bw -o results.npz -R H3K27ac_2ndup_sPEup.bed -a 500 -b 500 -p 32
+## "H3K27ac_2ndup.bed" is found in Figure_6 folder
+
+# 2) Plot average pattern of H3K27ac levels within genomic regions
+
+plotHeatmap -m results.npz -out results.pdf
+
+# 5) Combined the graphs into one using Illustrator
