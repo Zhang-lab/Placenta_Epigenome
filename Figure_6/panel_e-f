@@ -27,7 +27,7 @@ macs2 callpeak -t A78215*bam -c A78216*bam -f BAMPE  -q 0.01 -n CTL16_CTB_sPE_hb
 grep -v -e chrX -e chrY -e chrM macs2.narrowPeak > out.narrowPeak.filt
 
 # Create the csv samplesheet for analysis as following:
-# For 3rd tri vs sPE 
+## For 3rd tri vs sPE 
 SampleID,Tissue,Factor,Condition,Treatment,Replicate,bamReads,ControlID,bamControl,Peaks,PeakCaller
 A78203_31.4,sPECTB,H3K27ac,31.4,sPECTB,1,bam/A78203_IX5794_CBT1EANXX_5_TAGGAT_75bp.markdup.hbcfilt.bam,sPE-CTB_c1,bam/A78213_IX5795_CBT1EANXX_6_GATGCT_75bp.markdup.hbcfilt.bam,peaks/CTL10_CTB_sPE_31.4_hbcnorm_hg19_q0.01_H3K27ac_peaks.narrowPeak.filt,bed
 A78205_33,sPECTB,H3K27ac,33,sPECTB,2,bam/A78205_IX5794_CBT1EANXX_5_CGCCTG_75bp.markdup.hbcfilt.bam,sPE-CTB_c2,bam/A78206_IX5794_CBT1EANXX_5_TGCTTT_75bp.markdup.hbcfilt.bam,peaks/CTL11_CTB_sPE_33.0_hbcnorm_hg19_q0.01_H3K27ac_peaks.narrowPeak.filt,bed
@@ -39,8 +39,7 @@ B39987_37.6,thirdCTB,H3K27ac,37.6,thirdCTB,1,bam/B39987.mem.markdup.merge.markdu
 B39991_39.3,thirdCTB,H3K27ac,39.3,thirdCTB,2,bam/B39991.mem.markdup.merge.markdup.hbcfilt.bam,third_CTB_c3,bam/B39992_IX7578_CDRPUANXX_8_TCCAATCG-GTCAGTTG_75bp.markdup.hbcfilt.bam,peaks/YKCF29_B39991_39.3_hbcnorm_hg19_q0.01_H3K27ac_peaks.narrowPeak.filt,bed
 B39993_39.4,thirdCTB,H3K27ac,39.4,thirdCTB,3,bam/B39993.mem.markdup.merge.markdup.hbcfilt.bam,third_CTB_c4,bam/B39994_IX7578_CDRPUANXX_8_GAGCTTGT-ATTCGAGG_75bp.markdup.hbcfilt.bam,peaks/YKCF30_B39993_39.4_hbcnorm_hg19_q0.01_H3K27ac_peaks.narrowPeak.filt,bed
 B39995_39.3,thirdCTB,H3K27ac,39.3,thirdCTB,4,bam/B39995.mem.markdup.merge.markdup.hbcfilt.bam,third_CTB_c5,bam/B39996_IX7578_CDRPUANXX_8_GAAGGTTC-GATACTGG_75bp.markdup.hbcfilt.bam,peaks/YKCF31_B39995_39.3_hbcnorm_hg19_q0.01_H3K27ac_peaks.narrowPeak.filt,bed
-
-# For 2nd tri vs sPE 
+## For 2nd tri vs sPE 
 SampleID,Tissue,Factor,Condition,Treatment,Replicate,bamReads,ControlID,bamControl,Peaks,PeakCaller
 A78203_31.4,sPECTB,H3K27ac,31.4,sPECTB,1,bam/A78203_IX5794_CBT1EANXX_5_TAGGAT_75bp.markdup.hbcfilt.bam,sPE-CTB_c1,bam/A78213_IX5795_CBT1EANXX_6_GATGCT_75bp.markdup.hbcfilt.bam,peaks/CTL10_CTB_sPE_31.4_hbcnorm_hg19_q0.01_H3K27ac_peaks.narrowPeak.filt,bed
 A78205_33,sPECTB,H3K27ac,33,sPECTB,2,bam/A78205_IX5794_CBT1EANXX_5_CGCCTG_75bp.markdup.hbcfilt.bam,sPE-CTB_c2,bam/A78206_IX5794_CBT1EANXX_5_TGCTTT_75bp.markdup.hbcfilt.bam,peaks/CTL11_CTB_sPE_33.0_hbcnorm_hg19_q0.01_H3K27ac_peaks.narrowPeak.filt,bed
