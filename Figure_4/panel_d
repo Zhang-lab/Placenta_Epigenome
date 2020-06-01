@@ -19,16 +19,16 @@ macs2 callpeak -t B39995_uniqreads.bam -c B39996_uniqreads.bam -f BAMPE -q 0.01 
 # MACS2 narrow peak file filter by removing chrX, chrY and chrM rows.
 grep -v -e chrX -e chrY -e chrM macs2.narrowPeak > out.narrowPeak.filt
 
-# Create the tab-delimited samplesheet for analysis as following:
-SampleID	Tissue	Factor	Condition	Treatment	Replicate	bamReads	ControlID	bamControl	Peaks	PeakCaller
-B39979_18.6	second-CTB	H3K27ac	18.6	normal	1	bam/B39979.mem.markdup.merge.markdup.hbcfilt.bam	second_CTB_c2	bam/B39980_IX7577_CDRPUANXX_7_TAGACGTG-TTGGTGAG_75bp.markdup.hbcfilt.bam	peaks/YKCF23_B39979_18.6_hbcnorm_hg19_q0.01_H3K27ac_peaks.narrowPeak.filt	bed
-B39981_20.5	second-CTB	H3K27ac	20.5	normal	2	bam/B39981.mem.markdup.merge.markdup.hbcfilt.bam	second_CTB_c3	bam/B39982_IX7577_CDRPUANXX_7_CCGGAATT-CATTCGGT_75bp.markdup.hbcfilt.bam	peaks/YKCF24_B39981_20.5_hbcnorm_hg19_q0.01_H3K27ac_peaks.narrowPeak.filt	bed
-B39983_19.5	second-CTB	H3K27ac	19.5	normal	3	bam/B39983.mem.markdup.merge.markdup.hbcfilt.bam	second_CTB_c4	bam/B39984_IX7577_CDRPUANXX_7_CTCCTAGA-TGTGAAGC_75bp.markdup.hbcfilt.bam	peaks/YKCF25_B39983_19.5_hbcnorm_hg19_q0.01_H3K27ac_peaks.narrowPeak.filt	bed
-B39985_21.5	second-CTB	H3K27ac	21.5	normal	4	bam/B39985.mem.markdup.merge.markdup.hbcfilt.bam	second_CTB_c5	bam/B39986_IX7577_CDRPUANXX_7_CAACGGAT-TAAGTGGC_75bp.markdup.hbcfilt.bam	peaks/YKCF26_B39985_21.5_hbcnorm_hg19_q0.01_H3K27ac_peaks.narrowPeak.filt	bed
-B39987_37.6	third-CTB	H3K27ac	37.6	normal	1	bam/B39987.mem.markdup.merge.markdup.hbcfilt.bam	third_CTB_c1	bam/B39988_IX7578_CDRPUANXX_8_TGGCTATC-ACGTGATG_75bp.markdup.hbcfilt.bam	peaks/YKCF27_B39987_37.6_hbcnorm_hg19_q0.01_H3K27ac_peaks.narrowPeak.filt	bed
-B39991_39.3	third-CTB	H3K27ac	39.3	normal	2	bam/B39991.mem.markdup.merge.markdup.hbcfilt.bam	third_CTB_c3	bam/B39992_IX7578_CDRPUANXX_8_TCCAATCG-GTCAGTTG_75bp.markdup.hbcfilt.bam	peaks/YKCF29_B39991_39.3_hbcnorm_hg19_q0.01_H3K27ac_peaks.narrowPeak.filt	bed
-B39993_39.4	third-CTB	H3K27ac	39.4	normal	3	bam/B39993.mem.markdup.merge.markdup.hbcfilt.bam	third_CTB_c4	bam/B39994_IX7578_CDRPUANXX_8_GAGCTTGT-ATTCGAGG_75bp.markdup.hbcfilt.bam	peaks/YKCF30_B39993_39.4_hbcnorm_hg19_q0.01_H3K27ac_peaks.narrowPeak.filt	bed
-B39995_39.3	third-CTB	H3K27ac	39.3	normal	4	bam/B39995.mem.markdup.merge.markdup.hbcfilt.bam	third_CTB_c5	bam/B39996_IX7578_CDRPUANXX_8_GAAGGTTC-GATACTGG_75bp.markdup.hbcfilt.bam	peaks/YKCF31_B39995_39.3_hbcnorm_hg19_q0.01_H3K27ac_peaks.narrowPeak.filt	bed
+# Create the csv samplesheet for analysis as following:
+SampleID,Tissue,Factor,Condition,Treatment,Replicate,bamReads,ControlID,bamControl,Peaks,PeakCaller
+B39979_18.6,secondCTB,H3K27ac,18.6,secondCTB,1,bam/B39979.mem.markdup.merge.markdup.hbcfilt.bam,second_CTB_c2,bam/B39980_IX7577_CDRPUANXX_7_TAGACGTG-TTGGTGAG_75bp.markdup.hbcfilt.bam,peaks/YKCF23_B39979_18.6_hbcnorm_hg19_q0.01_H3K27ac_peaks.narrowPeak.filt,bed
+B39981_20.5,secondCTB,H3K27ac,20.5,secondCTB,2,bam/B39981.mem.markdup.merge.markdup.hbcfilt.bam,second_CTB_c3,bam/B39982_IX7577_CDRPUANXX_7_CCGGAATT-CATTCGGT_75bp.markdup.hbcfilt.bam,peaks/YKCF24_B39981_20.5_hbcnorm_hg19_q0.01_H3K27ac_peaks.narrowPeak.filt,bed
+B39983_19.5,secondCTB,H3K27ac,19.5,secondCTB,3,bam/B39983.mem.markdup.merge.markdup.hbcfilt.bam,second_CTB_c4,bam/B39984_IX7577_CDRPUANXX_7_CTCCTAGA-TGTGAAGC_75bp.markdup.hbcfilt.bam,peaks/YKCF25_B39983_19.5_hbcnorm_hg19_q0.01_H3K27ac_peaks.narrowPeak.filt,bed
+B39985_21.5,secondCTB,H3K27ac,21.5,secondCTB,4,bam/B39985.mem.markdup.merge.markdup.hbcfilt.bam,second_CTB_c5,bam/B39986_IX7577_CDRPUANXX_7_CAACGGAT-TAAGTGGC_75bp.markdup.hbcfilt.bam,peaks/YKCF26_B39985_21.5_hbcnorm_hg19_q0.01_H3K27ac_peaks.narrowPeak.filt,bed
+B39987_37.6,thirdCTB,H3K27ac,37.6,thirdCTB,1,bam/B39987.mem.markdup.merge.markdup.hbcfilt.bam,third_CTB_c1,bam/B39988_IX7578_CDRPUANXX_8_TGGCTATC-ACGTGATG_75bp.markdup.hbcfilt.bam,peaks/YKCF27_B39987_37.6_hbcnorm_hg19_q0.01_H3K27ac_peaks.narrowPeak.filt,bed
+B39991_39.3,thirdCTB,H3K27ac,39.3,thirdCTB,2,bam/B39991.mem.markdup.merge.markdup.hbcfilt.bam,third_CTB_c3,bam/B39992_IX7578_CDRPUANXX_8_TCCAATCG-GTCAGTTG_75bp.markdup.hbcfilt.bam,peaks/YKCF29_B39991_39.3_hbcnorm_hg19_q0.01_H3K27ac_peaks.narrowPeak.filt,bed
+B39993_39.4,thirdCTB,H3K27ac,39.4,thirdCTB,3,bam/B39993.mem.markdup.merge.markdup.hbcfilt.bam,third_CTB_c4,bam/B39994_IX7578_CDRPUANXX_8_GAGCTTGT-ATTCGAGG_75bp.markdup.hbcfilt.bam,peaks/YKCF30_B39993_39.4_hbcnorm_hg19_q0.01_H3K27ac_peaks.narrowPeak.filt,bed
+B39995_39.3,thirdCTB,H3K27ac,39.3,thirdCTB,4,bam/B39995.mem.markdup.merge.markdup.hbcfilt.bam,third_CTB_c5,bam/B39996_IX7578_CDRPUANXX_8_GAAGGTTC-GATACTGG_75bp.markdup.hbcfilt.bam,peaks/YKCF31_B39995_39.3_hbcnorm_hg19_q0.01_H3K27ac_peaks.narrowPeak.filt,bed
 
 ## 3) Differential enrichment analysis using DiffBind
 
