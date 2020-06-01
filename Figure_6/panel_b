@@ -1,0 +1,18 @@
+# Use "H3K27ac_2ndvs3rd_sigdiff.bed" found in Figure_6 folder
+# This is the significantly differently H3K27 acetylated regions between 2nd trimester and 3rd trimester found in Figure 4d
+
+# 1) compute average scores in every genomic region found in "H3K27ac_2ndvs3rd_sigdiff.bed"
+multiBigwigSummary BED-file -b input1.bw input2.bw. input3.bw -o results.npz --BED H3K27ac_2ndvs3rd_sigdiff.bed --chromosomesToSkip chrX chrY -p 32 --outRawCounts H3K27ac_2ndvs3rd_sigdiff.counts.txt
+
+# 2) Using R, generate a heatmap 
+library(pheatmap)
+library(RColorBrewer)
+
+H3K27ac_2ndvs3rd_sigdiff.counts <- read.table(H3K27ac_2ndvs3rd_sigdiff.counts.txt)
+
+cal_z_score <- function(x){
+  (x - mean(x)) / sd(x)
+}
+ 
+data_subset_norm <- t(apply(H3K27ac_2ndvs3rd_sigdiff.counts, 1, cal_z_score))
+pheatmap(data_subset_norm)
