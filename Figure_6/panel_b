@@ -2,7 +2,7 @@
 ## This is the significantly differently H3K27 acetylated regions between 2nd trimester and 3rd trimester found in Figure 4d
 
 # 1) compute average scores in every genomic region found in "H3K27ac_2ndvs3rd_sigdiff.bed"
-multiBigwigSummary BED-file -b input1.bw input2.bw. input3.bw -o results.npz --BED H3K27ac_2ndvs3rd_sigdiff.bed --chromosomesToSkip chrX chrY -p 32 --outRawCounts H3K27ac_2ndvs3rd_sigdiff.counts.txt
+multiBigwigSummary BED-file -b inputt1.bw input2.bw. input3.bw -o results.npz --BED H3K27ac_2ndvs3rd_sigdiff.bed --chromosomesToSkip chrX chrY -p 32 --outRawCounts H3K27ac_2ndvs3rd_sigdiff.counts.txt
 
 # 2) Using R, generate the heatmap 
 library(pheatmap)
@@ -16,3 +16,21 @@ cal_z_score <- function(x){
  
 data_subset_norm <- t(apply(H3K27ac_2ndvs3rd_sigdiff.counts, 1, cal_z_score))
 pheatmap(data_subset_norm)
+
+
+# 3) Identification of 2nd trimester-like sPE sites
+
+## Modify H3K27ac_2ndvs3rd_sigdiff.counts.txt from multiBigwigSummary by removing 2nd trimester samples. concat chr, start, and end to make genomic region keys.
+## The idea is to identify differentially enriched sites between 3rd and sPE CTBs within H3K27ac_2ndvs3rd_sigdiff.bed genomic regions
+
+
+x <- read.delim("H3K27ac_2ndvs3rd_sigdiff.counts)
+group <- factor(c(1,1,1,1,1,1,2,2,2,2)) # 1 = sPEs; 2 = 3rd trimesters
+y <- DGEList(counts=x,group=group)
+keep <- filterByExpr(y)
+design <- model.matrix(~group)
+y <- estimateDisp(y,design)
+fit <- glmQLFit(y,design)
+qlf <- glmQLFTest(fit,coef=2)
+res <- topTags(qlf, n = inf )
+write.table(res, "output.txt, sep="\t", row.names=TRUE, col.names=TRUE)
