@@ -13,9 +13,10 @@ sort -k1,1 -k2,2n new_3rdtri_merged2.average.bedGraph > new_3rdtri_merged2.avera
 # Run bedGraphToBigWig to convert bedGraph to Bigwig for visualization
 bedGraphToBigWig new_3rdtri_merged2.average.bedGraph.sorted hg19.size bedGraphToBigWig new_3rdtri_merged2.average.bw
 
-## 2) Calculate scores per genome regions found in "H3K27ac_2ndup.bed". 
 
-computeMatrix --reference-point -S 2ndtri.bw 3rdtri.bw 2ndlike_sPE.bw 3rdlike_sPE.bw -o results.npz -R H3K27ac_2ndup.bed -a 500 -b 500 -p 32
+## 2) Calculate scores per genome regions found in "H3K27ac_2ndup_sPEup.bed". 
+
+computeMatrix --reference-point -S 2ndtri.bw 3rdtri.bw 2ndlike_sPE.bw 3rdlike_sPE.bw -o results.npz -R H3K27ac_2ndup_sPEup.bed -a 500 -b 500 -p 32
 #"H3K27ac_2ndup.bed" is found in Figure_6 folder
 
 ## 3) Plot average pattern of H3K27ac levels within genomic regions
