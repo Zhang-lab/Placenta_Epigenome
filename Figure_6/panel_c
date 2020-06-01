@@ -13,14 +13,33 @@ sort -k1,1 -k2,2n new_3rdtri_merged2.average.bedGraph > new_3rdtri_merged2.avera
 # Run bedGraphToBigWig to convert bedGraph to Bigwig for visualization
 bedGraphToBigWig new_3rdtri_merged2.average.bedGraph.sorted hg19.size bedGraphToBigWig new_3rdtri_merged2.average.bw
 
+# 2) Identification of 2nd trimester-like sPE sites
 
-## 2) Calculate scores per genome regions found in "H3K27ac_2ndup_sPEup.bed". 
+## Modify H3K27ac_2ndvs3rd_sigdiff.counts.txt from multiBigwigSummary by removing 2nd trimester samples. concat chr, start, and end to make genomic region keys.
+## The idea is to identify differentially enriched sites between 3rd and sPE CTBs within H3K27ac_2ndvs3rd_sigdiff.bed genomic regions
+
+
+x <- read.delim("H3K27ac_2ndvs3rd_sigdiff.counts)
+group <- factor(c(1,1,1,1,1,1,2,2,2,2)) # 1 = sPEs; 2 = 3rd trimesters
+y <- DGEList(counts=x,group=group)
+keep <- filterByExpr(y)
+design <- model.matrix(~group)
+y <- estimateDisp(y,design)
+fit <- glmQLFit(y,design)
+qlf <- glmQLFTest(fit,coef=2)
+res <- topTags(qlf, n = inf )
+write.table(res, "output.txt, sep="\t", row.names=TRUE, col.names=TRUE)
+
+##filtered the output.txt by identifying the genomic regions with enrichment in 2nd trimester and sPE and saved a file nmaed "H3K27ac_2ndup_sPEup.bed". This file is found in Figure_6 folder.
+
+
+## 3) Calculate scores per genome regions found in "H3K27ac_2ndup_sPEup.bed". 
 
 computeMatrix --reference-point -S 2ndtri.bw 3rdtri.bw 2ndlike_sPE.bw 3rdlike_sPE.bw -o results.npz -R H3K27ac_2ndup_sPEup.bed -a 500 -b 500 -p 32
 #"H3K27ac_2ndup.bed" is found in Figure_6 folder
 
-## 3) Plot average pattern of H3K27ac levels within genomic regions
+## 4) Plot average pattern of H3K27ac levels within genomic regions
 
 plotHeatmap -m results.npz -out results.pdf
 
-## 4) Combined the graphs into one using Illustrator
+## 5) Combined the graphs into one using Illustrator
