@@ -1,0 +1,5 @@
+plot(d.early$x,rescale(d.early$y,range(0,1)),type="l",lty=1,col="#03c383",lwd=2,xlab="Methylation Level",ylab="Normalized CpG Density")
+lines(d.late$x,rescale(d.late$y,range(0,1)),type="l",lty=1,col="#fbbf45",lwd=2)
+lines(d.bmp$x,rescale(d.bmp$y,range(0,1)),type="l",lty=1,col="#0868ac",lwd=2)
+lines(d.es$x,rescale(d.es$y,range(0,1)),type="l",lty=1,col="#ed0345",lwd=2)
+lines(d.brain$x,rescale(d.brain$y,range(0,1)),type="l",lty=1,col="#710162",lwd=2)
