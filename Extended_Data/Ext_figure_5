@@ -1,0 +1,4 @@
+Gene count data are found in: Placenta_Epigenome/Figure_4/panel_h
+
+1) panel a, c, and d heatmaps were made using pheatmap, R package. 
+2) panel b is made uinsg GraphPad Prism 7. Scatter plots with mean with standard deviation. 

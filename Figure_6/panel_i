@@ -1,21 +1,117 @@
-# 1) Identify overlapping sites between panel g and panel h
-bedtools intersect -a sites_from_e.txt -b sites_from_f.txt > intersect1.txt
-bedtools intersect -a sites_from_f.txt -b sites_from_e.txt >intersect2.txt
-cat intersect1.txt intersect2.txt > intersect_between_e_and_f.txt
-bedtools merge -i intersect_between_e_and_f.txt > overlapping.txt
+# 1) Plug in the sites found in H3K27ac_sPE-specific_sPEup.bed in Test regions on http://great.stanford.edu/great/public-3.0.0/html/
+  # Background regions : whole genome
+  # Association rule settings: Proximal: 5 kb upstream, 5 kb downstream, plus Distal: up to 0 kb
+  
+# 2) Plug in the genes associated with the peaks into https://www.gsea-msigdb.org/gsea/msigdb/annotate.jsp
+  # Click H: Hallmark gene sets
 
-# 2) compute average scores in every genomic region found in "H3K27ac_2ndvs3rd_sigdiff.bed"
-multiBigwigSummary BED-file -b inputt1.bw input2.bw. input3.bw -o results.npz --BED overlapping.txt --chromosomesToSkip chrX chrY -p 32 --outRawCounts sPE-specific.counts.txt
 
-# 3) Using R, generate the heatmap 
-library(pheatmap)
-library(RColorBrewer)
-
-sPE-specific.counts <- read.table("sPE-specific.counts.txt")
-
-cal_z_score <- function(x){
-  (x - mean(x)) / sd(x)
-}
- 
-data_subset_norm <- t(apply(sPE-specific.counts, 1, cal_z_score))
-pheatmap(data_subset_norm)
+## genes used for #2
+A2M
+ABHD2
+ACKR5
+ADORA3
+AGAP3
+ALCAM
+ATP1A1
+BMF
+C3orf58
+CAMK2D
+CASP1
+CASP8
+CD44
+CD48
+CD53
+CD82
+CD84
+CD93
+CELF1
+CMKLR1
+CPED1
+CREG1
+CTSS
+CTSZ
+CXCR4
+CXXC5
+CYTH1
+CYTIP
+DCTN4
+ELK3
+EMP1
+EVI2A
+EVI2B
+FAM20A
+FCER1G
+FGR
+FHL3
+FLI1
+FMNL3
+FTL
+FYB
+GIMAP5
+GNG11
+GON4L
+GPR183
+GPR65
+GYPC
+HAVCR2
+HCST
+HLA-A
+ICAM1
+IFI30
+JUNB
+KIAA1462
+KLHL6
+KYNU
+LAPTM5
+LCP2
+LIMS1
+LITAF
+LY96
+MACC1
+MARCKS
+MICA
+MS4A4A
+MS4A7
+MYO1G
+NCF2
+NFKBID
+NFKBIE
+NOD2
+NRM
+NRROS
+PIK3AP1
+PIK3R5
+PLAUR
+PPM1M
+PPP1R18
+PRDM1
+PREX1
+PTPRC
+RASA3
+RNASET2
+RNF145
+SERPINA1
+SH2B3
+SLFN5
+SMIM3
+SOD2
+SPI1
+SQRDL
+SRGN
+SYT11
+THEMIS2
+TLR1
+TLR4
+TLR6
+TNFAIP2
+TNFSF10
+TNFSF8
+TRAF1
+TRDMT1
+TYROBP
+USP4
+VGLL4
+VIM
+ZC3H12A
+ZNF804A

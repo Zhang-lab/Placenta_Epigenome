@@ -1,0 +1,21 @@
+# 1) Identify overlapping sites between panel e and panel f
+bedtools intersect -a sites_from_e.txt -b sites_from_f.txt > intersect1.txt
+bedtools intersect -a sites_from_f.txt -b sites_from_e.txt >intersect2.txt
+cat intersect1.txt intersect2.txt > intersect_between_e_and_f.txt
+bedtools merge -i intersect_between_e_and_f.txt > overlapping.txt
+
+# 2) compute average scores in every genomic region found in "H3K27ac_2ndvs3rd_sigdiff.bed"
+multiBigwigSummary BED-file -b inputt1.bw input2.bw. input3.bw -o results.npz --BED overlapping.txt --chromosomesToSkip chrX chrY -p 32 --outRawCounts sPE-specific.counts.txt
+
+# 3) Using R, generate the heatmap 
+library(pheatmap)
+library(RColorBrewer)
+
+sPE-specific.counts <- read.table("sPE-specific.counts.txt")
+
+cal_z_score <- function(x){
+  (x - mean(x)) / sd(x)
+}
+ 
+data_subset_norm <- t(apply(sPE-specific.counts, 1, cal_z_score))
+pheatmap(data_subset_norm)
