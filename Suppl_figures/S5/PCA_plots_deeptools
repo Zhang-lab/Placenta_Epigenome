@@ -1,0 +1,4 @@
+# Used deeptools to generate PCA plots
+
+multiBigwigSummary -b <bigwig files> -o multiBigwigSummary.npz -bs 10000 -p 32 
+plotPCA --transpose -in multiBigwigSummary.npz -o PCA.pdf --markers o 

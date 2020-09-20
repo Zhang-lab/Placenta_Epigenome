@@ -1,0 +1,39 @@
+opening file : MMU.DMR
+Total  1166  lines.
+
+***Found Hyper DMR 1166
+
+
+****************************************
+opening file : /home/zhangbo/Genome/hg19/Ref_gene/New_Ver_Feb2014/Anno_CpG_island_hg19_Gs.bed
+Total  28691  lines.
+opening file : /home/zhangbo/Genome/hg19/Ref_gene/New_Ver_Feb2014/Anno_refGene_Uni_Long_Gs.bed
+Total  24944  lines.
+opening file : /home/zhangbo/Genome/hg19/Ref_gene/New_Ver_Feb2014/Anno_hg19_refGene_EXON.Gs.bed
+Total  476531  lines.
+opening file : /home/zhangbo/Genome/hg19/Ref_gene/New_Ver_Feb2014/Anno_Promoter_refGene_Uni_Long_2.5K
+Total  24944  lines.
+opening file : /home/zhangbo/Genome/hg19/EncodeTFBS/wgEncodeRegTfbsClusteredV3.bed
+Total  4380444  lines.
+
+!!!annotate hyper DMR...
+****************************************
+annotate in  Whole_gene
+NONE hit is   684
+Whole_gene  hit  482 
+
+annotate in  CpG_islands
+NONE hit is   1139
+CpG_islands  hit  27 
+
+annotate in  Promoter_Refgene
+NONE hit is   1142
+Promoter_Refgene  hit  24 
+
+annotate in  Exon
+NONE hit is   1090
+Exon  hit  76 
+
+annotate in  Encode_TFBS
+NONE hit is   1018
+Encode_TFBS  hit  148 

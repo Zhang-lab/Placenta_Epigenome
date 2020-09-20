@@ -1,0 +1,109 @@
+## 1) Identify narrow peaks for all replicates
+
+# second trimester H3K27ac samples
+macs2 callpeak -t B39979_uniqreads.bam -c B39980_uniqreads.bam -f BAMPE -q 0.01 -n YKCF23_B39979_18.6_hbcnorm_hg19_q0.01_H3K27ac
+macs2 callpeak -t B39981_uniqreads.bam -c B39982_uniqreads.bam -f BAMPE -q 0.01 -n YKCF24_B39981_20.5_hbcnorm_hg19_q0.01_H3K27ac
+macs2 callpeak -t B39983_uniqreads.bam -c B39984_uniqreads.bam -f BAMPE -q 0.01 -n YKCF25_B39983_19.5_hbcnorm_hg19_q0.01_H3K27ac
+macs2 callpeak -t B39985_uniqreads.bam -c B39986_uniqreads.bam -f BAMPE -q 0.01 -n YKCF26_B39985_21.5_hbcnorm_hg19_q0.01_H3K27ac
+
+# third trimester H3K27ac samples
+macs2 callpeak -t B39987_uniqreads.bam -c B39988_uniqreads.bam -f BAMPE -q 0.01 -n YKCF27_B39987_37.6_hbcnorm_hg19_q0.01_H3K27ac
+macs2 callpeak -t B39991_uniqreads.bam -c B39992_uniqreads.bam -f BAMPE -q 0.01 -n YKCF29_B39991_39.3_hbcnorm_hg19_q0.01_H3K27ac
+macs2 callpeak -t B39993_uniqreads.bam -c B39994_uniqreads.bam -f BAMPE -q 0.01 -n YKCF30_B39993_39.4_hbcnorm_hg19_q0.01_H3K27ac
+macs2 callpeak -t B39995_uniqreads.bam -c B39996_uniqreads.bam -f BAMPE -q 0.01 -n YKCF31_B39995_39.3_hbcnorm_hg19_q0.01_H3K27ac
+
+# sPE H3K27ac samples
+macs2 callpeak -t A78203*bam -c A78204*bam -f BAMPE  -q 0.01 -n CTL10_CTB_sPE_hbcnorm_hg19_31.4_q0.01_H3K27ac
+macs2 callpeak -t A78205*bam -c A78206*bam -f BAMPE  -q 0.01 -n CTL11_CTB_sPE_hbcnorm_hg19_33.0_q0.01_H3K27ac
+macs2 callpeak -t A78209*bam -c A78210*bam -f BAMPE  -q 0.01 -n CTL13_CTB_sPE_hbcnorm_hg19_30.2_q0.01_H3K27ac
+macs2 callpeak -t A78211*bam -c A78212*bam -f BAMPE  -q 0.01 -n CTL14_CTB_sPE_hbcnorm_hg19_31.4_q0.01_H3K27ac
+macs2 callpeak -t A78213*bam -c A78214*bam -f BAMPE  -q 0.01 -n CTL15_CTB_sPE_hbcnorm_hg19_28.1_q0.01_H3K27ac
+macs2 callpeak -t A78215*bam -c A78216*bam -f BAMPE  -q 0.01 -n CTL16_CTB_sPE_hbcnorm_hg19_33.3_q0.01_H3K27ac
+
+
+## 2) Create the samplesheet
+
+# MACS2 narrow peak file filter by removing chrX, chrY and chrM rows.
+grep -v -e chrX -e chrY -e chrM macs2.narrowPeak > out.narrowPeak.filt
+
+# Create the csv samplesheet for analysis as following:
+## For 3rd tri vs sPE 
+SampleID,Tissue,Factor,Condition,Treatment,Replicate,bamReads,ControlID,bamControl,Peaks,PeakCaller
+A78203_31.4,sPECTB,H3K27ac,31.4,sPECTB,1,bam/A78203_IX5794_CBT1EANXX_5_TAGGAT_75bp.markdup.hbcfilt.bam,sPE-CTB_c1,bam/A78213_IX5795_CBT1EANXX_6_GATGCT_75bp.markdup.hbcfilt.bam,peaks/CTL10_CTB_sPE_31.4_hbcnorm_hg19_q0.01_H3K27ac_peaks.narrowPeak.filt,bed
+A78205_33,sPECTB,H3K27ac,33,sPECTB,2,bam/A78205_IX5794_CBT1EANXX_5_CGCCTG_75bp.markdup.hbcfilt.bam,sPE-CTB_c2,bam/A78206_IX5794_CBT1EANXX_5_TGCTTT_75bp.markdup.hbcfilt.bam,peaks/CTL11_CTB_sPE_33.0_hbcnorm_hg19_q0.01_H3K27ac_peaks.narrowPeak.filt,bed
+A78209_30.2,sPECTB,H3K27ac,30.2,sPECTB,3,bam/A78209_IX5795_CBT1EANXX_6_AGCTAG_75bp.markdup.hbcfilt.bam,sPE-CTB_c4,bam/A78210_IX5795_CBT1EANXX_6_CATGGG_75bp.markdup.hbcfilt.bam,peaks/CTL13_CTB_sPE_hbcnorm_hg19_30.2_q0.01_H3K27ac_peaks.narrowPeak.filt,bed
+A78211_31.4,sPECTB,H3K27ac,31.4,sPECTB,4,bam/A78211_IX5795_CBT1EANXX_6_CTGATC_75bp.markdup.hbcfilt.bam,sPE-CTB_c5,bam/A78212_IX5795_CBT1EANXX_6_CTATCT_75bp.markdup.hbcfilt.bam,peaks/CTL14_CTB_sPE_hbcnorm_hg19_31.4_q0.01_H3K27ac_peaks.narrowPeak.filt,bed
+A78213_28.1,sPECTB,H3K27ac,28.1,sPECTB,5,bam/A78213_IX5795_CBT1EANXX_6_GATGCT_75bp.markdup.hbcfilt.bam,sPE-CTB_c6,bam/A78214_IX5795_CBT1EANXX_6_AGCATC_75bp.markdup.hbcfilt.bam,peaks/CTL15_CTB_sPE_hbcnorm_hg19_28.1_q0.01_H3K27ac_peaks.narrowPeak.filt,bed
+A78215_33.3,sPECTB,H3K27ac,33.3,sPECTB,6,bam/A78213_IX5795_CBT1EANXX_6_GATGCT_75bp.markdup.hbcfilt.bam,sPE-CTB_c7,bam/A78216_IX5796_CBT1EANXX_7_GCTCAT_75bp.markdup.hbcfilt.bam,peaks/CTL16_CTB_sPE_hbcnorm_hg19_33.3_q0.01_H3K27ac_peaks.narrowPeak.filt,bed
+B39987_37.6,thirdCTB,H3K27ac,37.6,thirdCTB,1,bam/B39987.mem.markdup.merge.markdup.hbcfilt.bam,third_CTB_c1,bam/B39988_IX7578_CDRPUANXX_8_TGGCTATC-ACGTGATG_75bp.markdup.hbcfilt.bam,peaks/YKCF27_B39987_37.6_hbcnorm_hg19_q0.01_H3K27ac_peaks.narrowPeak.filt,bed
+B39991_39.3,thirdCTB,H3K27ac,39.3,thirdCTB,2,bam/B39991.mem.markdup.merge.markdup.hbcfilt.bam,third_CTB_c3,bam/B39992_IX7578_CDRPUANXX_8_TCCAATCG-GTCAGTTG_75bp.markdup.hbcfilt.bam,peaks/YKCF29_B39991_39.3_hbcnorm_hg19_q0.01_H3K27ac_peaks.narrowPeak.filt,bed
+B39993_39.4,thirdCTB,H3K27ac,39.4,thirdCTB,3,bam/B39993.mem.markdup.merge.markdup.hbcfilt.bam,third_CTB_c4,bam/B39994_IX7578_CDRPUANXX_8_GAGCTTGT-ATTCGAGG_75bp.markdup.hbcfilt.bam,peaks/YKCF30_B39993_39.4_hbcnorm_hg19_q0.01_H3K27ac_peaks.narrowPeak.filt,bed
+B39995_39.3,thirdCTB,H3K27ac,39.3,thirdCTB,4,bam/B39995.mem.markdup.merge.markdup.hbcfilt.bam,third_CTB_c5,bam/B39996_IX7578_CDRPUANXX_8_GAAGGTTC-GATACTGG_75bp.markdup.hbcfilt.bam,peaks/YKCF31_B39995_39.3_hbcnorm_hg19_q0.01_H3K27ac_peaks.narrowPeak.filt,bed
+## For 2nd tri vs sPE 
+SampleID,Tissue,Factor,Condition,Treatment,Replicate,bamReads,ControlID,bamControl,Peaks,PeakCaller
+A78203_31.4,sPECTB,H3K27ac,31.4,sPECTB,1,bam/A78203_IX5794_CBT1EANXX_5_TAGGAT_75bp.markdup.hbcfilt.bam,sPE-CTB_c1,bam/A78213_IX5795_CBT1EANXX_6_GATGCT_75bp.markdup.hbcfilt.bam,peaks/CTL10_CTB_sPE_31.4_hbcnorm_hg19_q0.01_H3K27ac_peaks.narrowPeak.filt,bed
+A78205_33,sPECTB,H3K27ac,33,sPECTB,2,bam/A78205_IX5794_CBT1EANXX_5_CGCCTG_75bp.markdup.hbcfilt.bam,sPE-CTB_c2,bam/A78206_IX5794_CBT1EANXX_5_TGCTTT_75bp.markdup.hbcfilt.bam,peaks/CTL11_CTB_sPE_33.0_hbcnorm_hg19_q0.01_H3K27ac_peaks.narrowPeak.filt,bed
+A78209_30.2,sPECTB,H3K27ac,30.2,sPECTB,3,bam/A78209_IX5795_CBT1EANXX_6_AGCTAG_75bp.markdup.hbcfilt.bam,sPE-CTB_c4,bam/A78210_IX5795_CBT1EANXX_6_CATGGG_75bp.markdup.hbcfilt.bam,peaks/CTL13_CTB_sPE_hbcnorm_hg19_30.2_q0.01_H3K27ac_peaks.narrowPeak.filt,bed
+A78211_31.4,sPECTB,H3K27ac,31.4,sPECTB,4,bam/A78211_IX5795_CBT1EANXX_6_CTGATC_75bp.markdup.hbcfilt.bam,sPE-CTB_c5,bam/A78212_IX5795_CBT1EANXX_6_CTATCT_75bp.markdup.hbcfilt.bam,peaks/CTL14_CTB_sPE_hbcnorm_hg19_31.4_q0.01_H3K27ac_peaks.narrowPeak.filt,bed
+A78213_28.1,sPECTB,H3K27ac,28.1,sPECTB,5,bam/A78213_IX5795_CBT1EANXX_6_GATGCT_75bp.markdup.hbcfilt.bam,sPE-CTB_c6,bam/A78214_IX5795_CBT1EANXX_6_AGCATC_75bp.markdup.hbcfilt.bam,peaks/CTL15_CTB_sPE_hbcnorm_hg19_28.1_q0.01_H3K27ac_peaks.narrowPeak.filt,bed
+A78215_33.3,sPECTB,H3K27ac,33.3,sPECTB,6,bam/A78213_IX5795_CBT1EANXX_6_GATGCT_75bp.markdup.hbcfilt.bam,sPE-CTB_c7,bam/A78216_IX5796_CBT1EANXX_7_GCTCAT_75bp.markdup.hbcfilt.bam,peaks/CTL16_CTB_sPE_hbcnorm_hg19_33.3_q0.01_H3K27ac_peaks.narrowPeak.filt,bed
+B39979_18.6,secondCTB,H3K27ac,18.6,secondCTB,1,bam/B39979.mem.markdup.merge.markdup.hbcfilt.bam,second_CTB_c2,bam/B39980_IX7577_CDRPUANXX_7_TAGACGTG-TTGGTGAG_75bp.markdup.hbcfilt.bam,peaks/YKCF23_B39979_18.6_hbcnorm_hg19_q0.01_H3K27ac_peaks.narrowPeak.filt,bed
+B39981_20.5,secondCTB,H3K27ac,20.5,secondCTB,2,bam/B39981.mem.markdup.merge.markdup.hbcfilt.bam,second_CTB_c3,bam/B39982_IX7577_CDRPUANXX_7_CCGGAATT-CATTCGGT_75bp.markdup.hbcfilt.bam,peaks/YKCF24_B39981_20.5_hbcnorm_hg19_q0.01_H3K27ac_peaks.narrowPeak.filt,bed
+B39983_19.5,secondCTB,H3K27ac,19.5,secondCTB,3,bam/B39983.mem.markdup.merge.markdup.hbcfilt.bam,second_CTB_c4,bam/B39984_IX7577_CDRPUANXX_7_CTCCTAGA-TGTGAAGC_75bp.markdup.hbcfilt.bam,peaks/YKCF25_B39983_19.5_hbcnorm_hg19_q0.01_H3K27ac_peaks.narrowPeak.filt,bed
+B39985_21.5,secondCTB,H3K27ac,21.5,secondCTB,4,bam/B39985.mem.markdup.merge.markdup.hbcfilt.bam,second_CTB_c5,bam/B39986_IX7577_CDRPUANXX_7_CAACGGAT-TAAGTGGC_75bp.markdup.hbcfilt.bam,peaks/YKCF26_B39985_21.5_hbcnorm_hg19_q0.01_H3K27ac_peaks.narrowPeak.filt,bed
+
+## 3) Differential enrichment analysis using DiffBind
+
+# Load dependencies
+library(DiffBind)
+library(tidyverse)
+
+# Reading in peaksets
+samples <- read.csv('samplesheet.csv')
+head(samples) 
+  #check if it is the correct file
+dbObj <-dba(sampleSheet=samples)
+dbObj 
+  #check the summary info
+
+# Affinity binding matrix; compute count information for each of peaks
+dbObj <- dba.count(dbObj, filter=250, filterFun=mean, bParallel=dbObj$config$RunParallel)
+dbObj 
+	#check--there should be a column that contains FRiP
+
+# Exploratory data analysis
+pdf("diffbind_plots.pdf")
+dba.plotPCA(dbObj, attributes=DBA_FACTOR, label=DBA_ID) 
+	#DBA_TISSUE, DBA_TREATMENT, DBA_CONDITION, etc are possible
+plot(dbObj) 
+	#correlation heatmap
+
+# Establishing a contrast
+dbObj <- dba.contrast(dbObj, categories=DBA_FACTOR, minMembers = 2)
+
+# Performing the differential enrichement analysis
+dbObj <- dba.analyze(dbObj, method=DBA_ALL_METHODS)
+dba.show(dbObj, bContrasts=T)	
+	# see how many sites are identified as differentially enriched
+	
+# Visualizing the results
+dba.plotPCA(dbObj, contrast=1, method=DBA_ALL_METHODS, attributes=DBA_FACTOR, label=DBA_ID)
+dba.plotVenn(dbObj,contrast=1,method=DBA_ALL_METHODS)
+	# count overlapping peaks between edgeR and DESeq2
+dba.plotMA(dbObj, method=DBA_ALL_METHODS)
+	# visualize the effect of normalization on data
+dba.plotMA(dbObj, bXY=TRUE)
+	# visualize the concentrations of each sample groups against each other
+dba.plotBox(dbObj)
+	# how the reads are distributed amongst the different classes of differentially bound sites and sample groups
+dev.off() #turn off pdf 
+
+# Extracting results
+res <- dba.report(dbObj, method=DBA_ALL_METHODS, contrast =1, th=1)
+out <- as.data.frame(res)
+write.table(out, file="diffbind_avgscore250filt_out.txt", sep="\t", quote=F)
+
+# Save workspace 
+save.image(file="diffbind_work.RData")
+
+# Volcano plot was made using GraphPad Prism7 using the output "diffbind_averagescore250filt_out.txt"
